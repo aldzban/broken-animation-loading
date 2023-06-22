@@ -1,13 +1,11 @@
 use ambient_api::{
     animation::{AnimationPlayer, PlayClipFromUrlNode},
-    components::core::{animation::apply_animation_player, app::main_scene, model::model_from_url},
-    concepts::make_transformable,
-    prelude::*,
-};
-use ambient_api::{
     components::core::camera::aspect_ratio_from_window,
+    components::core::{animation::apply_animation_player, app::main_scene, model::model_from_url},
     concepts::make_perspective_camera,
-    entity::{add_component, resources},
+    concepts::make_transformable,
+    entity::despawn,
+    prelude::*,
 };
 
 #[main]
@@ -30,4 +28,5 @@ pub async fn main() {
         .spawn();
     clip.wait_until_loaded().await;
     println!("Congratz you Loaded"); // Never reached
+    despawn(model);
 }
